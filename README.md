@@ -1,0 +1,2 @@
+# filecheck
+init
