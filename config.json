@@ -1,0 +1,21 @@
+{
+    "log": {
+        "logLocation": "./log",
+        "reportLocation": "./report"
+    },
+    "targets": [
+        {
+            "name": "golang",
+            "description": "golang install folder",
+            "location": "C:/go",
+            "mode": "fileInfo",
+            "filter": [
+                "_Deleted",
+                "System Volume Information",
+                "$Recycle.Bin",
+                "C:/Windows",
+                "\\.(log|123)$"
+            ]
+        }
+    ]
+}
