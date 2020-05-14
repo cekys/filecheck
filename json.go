@@ -32,7 +32,7 @@ func readJSON(stPointer interface{}, jsonFile string) error {
 }
 
 //根据现有的文件信息结构体生成json文件
-func createJSONTable(configFile string) error {
+func createJSONTable(configFile string, zipbool bool) error {
 	//读取设置文件
 	var setting Settings
 	err := readJSON(&setting, configFile)
@@ -109,12 +109,14 @@ func createJSONTable(configFile string) error {
 			}
 
 			//zip压缩,并删除原有json文件
-			err := mypkg.Zipit(jsonName, zipName)
-			if err != nil {
-				return err
+			if zipbool {
+				err := mypkg.Zipit(jsonName, zipName)
+				if err != nil {
+					return err
+				}
+				//当成功压缩后删除json文件
+				os.RemoveAll(jsonName)
 			}
-			//当成功压缩后删除json文件
-			os.RemoveAll(jsonName)
 		}
 	}
 	return nil

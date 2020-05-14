@@ -5,10 +5,10 @@
     },
     "targets": [
         {
-            "name": "golang",
-            "description": "golang install folder",
-            "location": "C:/go",
-            "mode": "fileInfo",
+            "name": "log",
+            "description": "log",
+            "location": "./",
+            "mode": "sha1",
             "filter": [
                 "_Deleted",
                 "System Volume Information",
