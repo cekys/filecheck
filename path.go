@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"../mypkg"
+	"github.com/cekys/gopkg"
 )
 
 //扫描路径下文件,并将文件的文件信息存储返回一个切片

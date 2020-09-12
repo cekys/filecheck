@@ -2,16 +2,16 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"time"
-
-	"../mypkg"
 )
 
 func main() {
 	timeStart := time.Now()
 	diffs, newFiles, err := compare(DefaultConfig)
-	//err := createJSONTable(DefaultConfig, false)
-	mypkg.ErrorHandler(err, true)
+	if err != nil {
+		log.Fatal(err)
+	}
 	fmt.Println("diff file:", diffs)
 	fmt.Println("new file:", newFiles)
 	fmt.Println("work finished, it takes", time.Since(timeStart))

@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"../mypkg"
+	"github.com/cekys/gopkg"
 )
 
 //输入结构体指针与json文件路径,将json内部数据存储到结构体中

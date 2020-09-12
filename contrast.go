@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"../mypkg"
+	"github.com/cekys/gopkg"
 )
 
 func compare(configFile string) ([]Diff, []string, error) {
