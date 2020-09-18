@@ -25,7 +25,7 @@ func pathToStruct(root string, mode string, filter []string) (interface{}, error
 	root = strings.Replace(root, "\\", "/", -1)
 
 	//获取文件列表
-	err = mypkg.PathWalk(root, &fileList, filter, true)
+	err = gopkg.PathWalk(root, &fileList, filter, true)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ func pathToStruct(root string, mode string, filter []string) (interface{}, error
 		case "crc32", "md5", "sha1", "sha256":
 			//填充节点数据
 			hash.Path = filePath
-			hash.Value = mypkg.Checksum(mode, file)
+			hash.Value = gopkg.Checksum(mode, file)
 			//节点连接到切片
 			hashSlice = append(hashSlice, hash)
 		}

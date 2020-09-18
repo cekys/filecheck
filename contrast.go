@@ -36,7 +36,7 @@ func compare(configFile string) ([]Diff, []string, error) {
 		jsonName = strings.Replace(jsonName, "\\", "/", -1)
 
 		//获取存储数据表zip文件的名称
-		zipName := mypkg.StringTrimSuffix(jsonName) + ".zip"
+		zipName := gopkg.StringTrimSuffix(jsonName) + ".zip"
 
 		//获取存储数据表的root路径
 		root := target.Location
@@ -47,8 +47,8 @@ func compare(configFile string) ([]Diff, []string, error) {
 		root = strings.Replace(root, "\\", "/", -1)
 
 		//获取zip数据压缩包以及json数据文件的存在情况
-		zipExist := mypkg.PathExist(zipName)
-		jsonExist := mypkg.PathExist(jsonName)
+		zipExist := gopkg.PathExist(zipName)
+		jsonExist := gopkg.PathExist(jsonName)
 
 		//如果数据json与数据zip文件均不存在,返回错误
 		if !(zipExist || jsonExist) {
@@ -57,14 +57,14 @@ func compare(configFile string) ([]Diff, []string, error) {
 
 		//如果存在zip文件就解压
 		if zipExist {
-			err := mypkg.Unzip(zipName, logPath)
+			err := gopkg.Unzip(zipName, logPath)
 			if err != nil {
 				return diffs, newFiles, err
 			}
 		}
 
 		//读取新的文件列表
-		err = mypkg.PathWalk(root, &newFiles, filter, true)
+		err = gopkg.PathWalk(root, &newFiles, filter, true)
 		if err != nil {
 			return diffs, newFiles, err
 		}
@@ -82,11 +82,11 @@ func compare(configFile string) ([]Diff, []string, error) {
 				oldFile = strings.Replace(oldFile, "\\", "/", -1)
 
 				//在新文件列表中找到记录文件中的数据
-				position := mypkg.StringFindInSlice(newFiles, oldFile)
+				position := gopkg.StringFindInSlice(newFiles, oldFile)
 
 				if position != -1 {
 					//如果匹配,删除新文件列表里的对应元素
-					mypkg.SliceDelete(&newFiles, position)
+					gopkg.SliceDelete(&newFiles, position)
 
 					//获取文件的信息切片
 					f, err := os.Stat(oldFile)
@@ -124,14 +124,14 @@ func compare(configFile string) ([]Diff, []string, error) {
 				oldHash = strings.Replace(oldHash, "\\", "/", -1)
 
 				//在新文件列表中找到记录文件中的数据
-				position := mypkg.StringFindInSlice(newFiles, oldHash)
+				position := gopkg.StringFindInSlice(newFiles, oldHash)
 
 				if position != -1 {
 					//如果匹配,删除新文件列表里的对应元素
-					mypkg.SliceDelete(&newFiles, position)
+					gopkg.SliceDelete(&newFiles, position)
 
 					//计算特征值是否符合
-					hashMatch := mypkg.Checksum(target.Mode, oldHash) == oHash.Value
+					hashMatch := gopkg.Checksum(target.Mode, oldHash) == oHash.Value
 
 					//填写diffs表
 					if !hashMatch {

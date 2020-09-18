@@ -45,7 +45,7 @@ func createJSONTable(configFile string, zipbool bool) error {
 	if err != nil {
 		return err
 	}
-	mypkg.PathCreate(logPath)
+	gopkg.PathCreate(logPath)
 
 	//对每一个配置文件中target进行操作
 	for _, target := range setting.Targets {
@@ -58,14 +58,14 @@ func createJSONTable(configFile string, zipbool bool) error {
 		root = strings.Replace(root, "\\", "/", -1)
 
 		//查看此目录是否确实存在
-		if mypkg.PathExist(root) {
+		if gopkg.PathExist(root) {
 
 			//获取存储数据表的json文件名称
 			jsonName := filepath.Join(logPath, target.Name+".json")
 			jsonName = strings.Replace(jsonName, "\\", "/", -1)
 
 			//获取存储数据表zip文件的名称
-			zipName := mypkg.StringTrimSuffix(jsonName) + ".zip"
+			zipName := gopkg.StringTrimSuffix(jsonName) + ".zip"
 
 			switch target.Mode {
 			case "fileInfo":
@@ -110,7 +110,7 @@ func createJSONTable(configFile string, zipbool bool) error {
 
 			//zip压缩,并删除原有json文件
 			if zipbool {
-				err := mypkg.Zipit(jsonName, zipName)
+				err := gopkg.Zipit(jsonName, zipName)
 				if err != nil {
 					return err
 				}
